@@ -14,7 +14,7 @@
          <Font size="24.0" />
       </font>
    </Label>
-   <GridPane fx:id="gridPane" alignment="TOP_CENTER" gridLinesVisible="true">
+   <GridPane fx:id="gridPane" alignment="TOP_CENTER" gridLinesVisible="true" prefHeight="178.0" prefWidth="253.0">
      <columnConstraints>
        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -57,10 +57,25 @@
          <TextField alignment="CENTER" GridPane.columnIndex="4" GridPane.rowIndex="4" />
          <TextField alignment="CENTER" GridPane.rowIndex="5" />
          <TextField alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-         <TextField alignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+         <TextField alignment="CENTER" prefHeight="142.0" prefWidth="51.0" GridPane.columnIndex="2" GridPane.rowIndex="5" />
          <TextField alignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="5" />
          <TextField alignment="CENTER" GridPane.columnIndex="4" GridPane.rowIndex="5" />
-         <TextField GridPane.columnIndex="2" />
+         <TextField alignment="CENTER" GridPane.columnIndex="2" />
       </children>
    </GridPane>
+   <Label fx:id="YouLose" alignment="CENTER" layoutX="94.0" layoutY="46.0" prefHeight="70.0" prefWidth="126.0" text="You Lose!" visible="false">
+      <font>
+         <Font size="24.0" />
+      </font>
+   </Label>
+   <Label fx:id="YouWin" alignment="CENTER" contentDisplay="CENTER" layoutX="94.0" layoutY="281.0" prefHeight="70.0" prefWidth="126.0" text="You Win!" visible="false">
+      <font>
+         <Font size="24.0" />
+      </font>
+   </Label>
+   <Label fx:id="PlayAgain" alignment="CENTER" layoutX="94.0" layoutY="241.0" prefHeight="70.0" prefWidth="126.0" text="Play Again?" visible="false">
+      <font>
+         <Font size="24.0" />
+      </font>
+   </Label>
 </VBox>

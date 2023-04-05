@@ -14,9 +14,15 @@ import javafx.scene.layout.GridPane;
 public class WordleController {
     @FXML
     private Label wordleLabel;
+    @FXML
+    private Label YouWin;
+    @FXML
+    private Label YouLose;
+    @FXML
+    private Label PlayAgain;
     private WordleImplementation wordle = new edu.virginia.cs.wordle.WordleImplementation();
     private String guess;
-    private String answer;
+    private String answer = wordle.getAnswer();
 
     private int guesses;
     @FXML
@@ -29,30 +35,26 @@ public class WordleController {
     @FXML
     GridPane gridPane = new GridPane();
     TextField[][] wordleGame = new TextField[5][6];
-
-
-    //each box accepts one letter and automatically moves on to the next
-
-    //once answer is entered, color each box and leave that guess up and move to next row
-    /*@FXML
-    protected void EnterKey(KeyEvent event) {
-        if (event.getCode().equals(KeyCode.ENTER)) {
-            try {
-                if(guess == answer){
-
-                }
-            } catch (NumberFormatException e) {
-                errorLabel.setText("Error: Enter a valid int");
-            }
-        }
-    }*/
     public void exitTheGame(ActionEvent event){
         System.exit(0);
     }
     //if player guess is correct, end game
     public void Cursor(KeyEvent event){
+        makeLabelsInvisible();
         field = (TextField) getNode(gridPane,c,r);
         field.setStyle("-fx-text-inner-color: #000000; -fx-background-color: #FFFFFF;");
+        if(event.getCharacter().isBlank()){
+            Node n1 = getNode(gridPane,4,r);
+            TextField newField = (TextField) n1;
+            if(c>0){
+                Node n2 = getNode(gridPane,c-1,r);
+                TextField newField2 = (TextField) n2;
+                newField2.requestFocus();
+                c--;
+                guess = guess.substring(0,c);
+            }
+
+        }
         if(!event.getCharacter().isBlank()){
             String x = event.getCharacter().toUpperCase();
             field.setText(x);
@@ -61,6 +63,7 @@ public class WordleController {
             if(c<4){
                 Node node = getNode(gridPane, c+1, r);
                 TextField newField = (TextField)node;
+                newField.requestFocus();
                 c++;
             }
             if(guess.length()==5){
@@ -80,26 +83,49 @@ public class WordleController {
 
                     }
                 }
+                if(wordle.isGameOver()){
+                    stopPlaying();
+                    r = 0;
+                    c = 0;
+                    Node n1 = getNode(gridPane,c,r);
+                    TextField newField = (TextField) n1;
+                    newField.requestFocus();
+                    if(wordle.isWin()){
+                        String win = "You Win!";
+                        String lose = "You Lose!";
+                        YouWin.setVisible(true);
+                    }
+                    else if (wordle.isLoss()){
+                        String lose = "You Lose!";
+                            YouLose.setVisible(true);
+                    }
+
+                }
             }
             guess = "";
             c=0;
             r++;
             Node n1 = getNode(gridPane,c,r);
-
             TextField newField = (TextField) n1;
             newField.requestFocus();
-
-
         }
-        public void stopPlaying(){
-            int gridPaneWidth = 5;
-            int gridPaneHeight = 6;
-            for(int i =0;i<gridPaneWidth;i++){
-                for(int j = 0;j<gridPaneHeight;j++){
-                    Node n1 = getNode(gridPane,i,j);
-                    TextField newField = (TextField) n1;
-                    newField.setEditable(false);
-                }
+
+
+    }
+    public void makeLabelsInvisible(){
+        YouLose.setVisible(false);
+        YouWin.setVisible(false);
+        PlayAgain.setVisible(false);
+
+    }
+    public void stopPlaying(){
+        int gridPaneWidth = 5;
+        int gridPaneHeight = 6;
+        for(int i =0;i<gridPaneWidth;i++){
+            for(int j = 0;j<gridPaneHeight;j++){
+                Node n1 = getNode(gridPane,i,j);
+                TextField newField = (TextField) n1;
+                newField.setEditable(false);
             }
         }
     }
