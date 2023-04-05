@@ -14,7 +14,7 @@
          <Font size="24.0" />
       </font>
    </Label>
-   <GridPane alignment="TOP_CENTER" gridLinesVisible="true">
+   <GridPane fx:id="gridPane" alignment="TOP_CENTER" gridLinesVisible="true">
      <columnConstraints>
        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />

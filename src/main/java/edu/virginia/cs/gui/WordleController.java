@@ -1,4 +1,5 @@
 package edu.virginia.cs.gui;
+import edu.virginia.cs.wordle.LetterResult;
 import edu.virginia.cs.wordle.WordleImplementation;
 
 import javafx.event.ActionEvent;
@@ -57,6 +58,37 @@ public class WordleController {
             field.setText(x);
             String n = field.getText();
             guesses = guesses + Integer.parseInt(n);
+            if(c<4){
+                Node node = getNode(gridPane, c+1, r);
+                TextField newField = (TextField)node;
+                c++;
+            }
+            if(guess.length()==5){
+                LetterResult[] answer = wordle.submitGuess(guess);
+                for(int i = 0;i<5;i++){
+                    Node node1 = getNode(gridPane, i, r);
+                    TextField field1 = (TextField)node1;
+                    if(answer[i]==LetterResult.YELLOW){
+                        field1.setStyle("-fx-background-color: #c8b653; -fx-text-inner-color: #FFFFFFF;");
+                    }
+                    else if(answer[i]==LetterResult.GREEN){
+                        field1.setStyle("-fx-background-color: #228B22; -fx-text-inner-color: #FFFFFFF;");
+
+                    }
+                    else if(answer[i]==LetterResult.GRAY){
+                        field1.setStyle("-fx-background-color: #808080; -fx-text-inner-color: #FFFFFFF;");
+
+                    }
+                }
+            }
+            guess = "";
+            c=0;
+            r++;
+            Node n1 = getNode(gridPane,c,r);
+
+            TextField newField = (TextField) n1;
+            newField.requestFocus();
+
 
         }
     }
