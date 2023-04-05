@@ -91,6 +91,17 @@ public class WordleController {
 
 
         }
+        public void stopPlaying(){
+            int gridPaneWidth = 5;
+            int gridPaneHeight = 6;
+            for(int i =0;i<gridPaneWidth;i++){
+                for(int j = 0;j<gridPaneHeight;j++){
+                    Node n1 = getNode(gridPane,i,j);
+                    TextField newField = (TextField) n1;
+                    newField.setEditable(false);
+                }
+            }
+        }
     }
     public Node getNode(GridPane gridPane,int column, int row){
         int x = 0;
