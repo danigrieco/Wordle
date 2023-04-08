@@ -1,6 +1,7 @@
 package edu.virginia.cs.gui;
 import edu.virginia.cs.wordle.IllegalWordException;
 import edu.virginia.cs.wordle.LetterResult;
+import edu.virginia.cs.wordle.WordleDictionary;
 import edu.virginia.cs.wordle.WordleImplementation;
 
 import javafx.event.ActionEvent;
@@ -15,6 +16,8 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
+import java.util.EventListener;
+import java.util.ArrayList;
 
 public class WordleController {
     @FXML
@@ -42,42 +45,56 @@ public class WordleController {
     //Create 6x5 box
     @FXML
     GridPane gridPane = new GridPane();
-    private int r;
-    private int c;
-    private String guess;
+    private int r = 0;
+    private int c = 0;
+    private String guess = "";
+    private WordleDictionary dictionary = new WordleDictionary();
     //TextField[][] wordleGame = new TextField[5][6];
     public void exitTheGame(ActionEvent event){
         System.exit(0);
     }
     //if player guess is correct, end game
     public void Cursor(KeyEvent event){
-
         //makeLabelsInvisible();
         TextField field = (TextField) getNode(gridPane,c,r);
         field.setStyle("-fx-text-inner-color: #000000; -fx-background-color: #FFFFFF;");
-        if(event.getCharacter().isBlank()){
-            Node n1 = getNode(gridPane,4,r);
-            TextField newField = (TextField) n1;
-            newField.setText("");
+
+        if(event.getCode().equals(KeyCode.BACK_SPACE)){
+           // Node n1 = getNode(gridPane,c,r);
+            //TextField newField = (TextField) n1;
+            if(c ==0){
+                field.setText("");
+            }
             if(c>0){
                 Node n2 = getNode(gridPane,c-1,r);
                 TextField newField2 = (TextField) n2;
                 newField2.requestFocus();
-                newField2.setText("");
+                field.clear();
                 c--;
-                guess = guess.substring(0,c);
+                guess = guess.substring(0,guess.length()-1);
+
             }
 
         }
+        /*if(event.getCode().equals(KeyCode.)){
+
+        }*/
         else{
-            String x = event.getCharacter().toUpperCase();
-            field.setText(x);
-            String n = field.getText();
-            guess = guess + (n);
+            field.setEditable(true);
+            //field.setText(event.getCharacter().toUpperCase());
+            //TextField field1 = (TextField) getNode(gridPane,c,r);
+            //field.setText(x);
+            //String n = field.getText();
+            guess+= field.getText();
             if(c<4){
-                TextField newField = (TextField)getNode(gridPane,c+1,r);
-                newField.requestFocus();
+                //field.requestFocus();
+                //TextField newField = (TextField)getNode(gridPane,c+1,r);
+                field.requestFocus();
                 c++;
+
+            }
+            if(c==4){
+                field.requestFocus();
             }
             if(guess.length()==5) {
                 try {
@@ -101,7 +118,7 @@ public class WordleController {
                         c = 0;
                         Node n1 = getNode(gridPane, c, r);
                         TextField newField = (TextField) n1;
-                        newField.requestFocus();
+                        //newField.requestFocus();
                         if (wordle.isWin()) {
 
                             //YouWin.setVisible(true);
@@ -114,12 +131,12 @@ public class WordleController {
 
                     }
                     else {
+                        r++;
                         guess = "";
                         c = 0;
-                        r++;
                         Node n1 = getNode(gridPane, c, r);
-                        TextField newField = (TextField) n1;
-                        newField.requestFocus();
+                        TextField newField3 = (TextField) n1;
+                        newField3.requestFocus();
                     }
                 } catch(IllegalWordException newWord){
                     c = 4;
