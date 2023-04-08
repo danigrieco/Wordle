@@ -28,10 +28,14 @@ public class WordleController {
     private Label YouLose;
     @FXML
     private Label PlayAgain;
+    @FXML
+    private Button exit;
+    @FXML
+    private Button playAgain;
+    @FXML
+    private Label theanswer;
     private WordleImplementation wordle = new edu.virginia.cs.wordle.WordleImplementation();
-
     private String answer = wordle.getAnswer();
-
     private int guesses;
     @FXML
     private Label errorLabel;
@@ -50,11 +54,14 @@ public class WordleController {
     private String guess = "";
     private WordleDictionary dictionary = new WordleDictionary();
     //TextField[][] wordleGame = new TextField[5][6];
+
     public void exitTheGame(ActionEvent event){
         System.exit(0);
     }
     //if player guess is correct, end game
+
     public void Cursor(KeyEvent event){
+
         //makeLabelsInvisible();
         TextField field = (TextField) getNode(gridPane,c,r);
         field.setStyle("-fx-text-inner-color: #000000; -fx-background-color: #FFFFFF;");
@@ -118,7 +125,7 @@ public class WordleController {
                         c = 0;
                         Node n1 = getNode(gridPane, c, r);
                         TextField newField = (TextField) n1;
-                        //newField.requestFocus();
+                        newField.requestFocus();
                         if (wordle.isWin()) {
 
                             //YouWin.setVisible(true);
@@ -128,27 +135,24 @@ public class WordleController {
                         }
                         //PlayAgain.setVisible(true);
                         //buttonsVisible();
-
                     }
                     else {
-                        r++;
                         guess = "";
                         c = 0;
+                        r++;
                         Node n1 = getNode(gridPane, c, r);
-                        TextField newField3 = (TextField) n1;
-                        newField3.requestFocus();
+                        TextField newField = (TextField) n1;
+                        newField.requestFocus();
                     }
                 } catch(IllegalWordException newWord){
                     c = 4;
                     TextField newField = (TextField) getNode(gridPane,c,r);
                     newField.requestFocus();
                 }
-
             }
         }
-
-
     }
+
     public void makeLabelsInvisible(){
         YouLose.setVisible(false);
         YouWin.setVisible(false);
@@ -159,6 +163,7 @@ public class WordleController {
         Yes.setVisible(true);
         No.setVisible(true);
     }*/
+
     public void moveToTextField(MouseEvent mouseEvent){
         EventType<MouseEvent> event = MouseEvent.MOUSE_PRESSED;
         if(mouseEvent.getEventType().equals(event)){
@@ -169,6 +174,7 @@ public class WordleController {
             }
         }
     }
+
     public void stopPlaying(){
         int gridPaneWidth = 5;
         int gridPaneHeight = 6;
@@ -180,6 +186,7 @@ public class WordleController {
             }
         }
     }
+
     public Node getNode(GridPane gridPane,int column, int row){
         int x = 0;
         for(Node child: gridPane.getChildren()){
@@ -187,7 +194,6 @@ public class WordleController {
                 gridPane.setColumnIndex(child,0);
                 x = 0;
             }
-
             if(gridPane.getRowIndex(child)==null&&x==0){
                 gridPane.setRowIndex(child,0);
                 x = 0;
@@ -195,18 +201,44 @@ public class WordleController {
             if(RowandColumnCheck(child, column, row)){
                 return child;
             }
-
         }
         return null;
     }
+
     public boolean RowandColumnCheck(Node child,int column, int row){
         if(gridPane.getRowIndex(child)==row && gridPane.getColumnIndex(child)==column){
             return true;
         }
         return false;
     }
-    public void playAgain(){
 
+    public void lastButtonsVisible() {
+        playAgain.setVisible(true);
+        exit.setVisible(true);
+    }
+
+    public void playAgain(ActionEvent event){
+        int gpwidth = 5;
+        int gpheight = 6;
+        wordle = new edu.virginia.cs.wordle.WordleImplementation();
+        answer = wordle.getAnswer();
+        for(int i=0; i<gpwidth; i++) {
+            for(int j=0; j<gpheight; j++) {
+                Node n1 = getNode(gridPane, i, j);
+                TextField newField = (TextField) n1;
+                newField.setText("");
+                newField.setStyle("-fx-background-color: #FFFFFF");
+                newField.setEditable(true);
+            }
+        }
+        playAgain.setVisible(false);
+        theanswer.setVisible(false);
+        exit.setVisible(false);
+        r = 0;
+        c = 0;
+        Node n2 = getNode(gridPane, c, r);
+        TextField curr = (TextField) n2;
+        curr.requestFocus();
     }
 
     //if player runs out of guesses, end game and display the correct answer
