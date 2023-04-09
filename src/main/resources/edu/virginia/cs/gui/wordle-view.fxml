@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox fx:id="Yes" alignment="CENTER" prefHeight="341.0" prefWidth="294.0" spacing="20.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.virginia.cs.gui.WordleController">
+<VBox alignment="CENTER" prefHeight="341.0" prefWidth="294.0" spacing="20.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.virginia.cs.gui.WordleController">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
@@ -33,9 +33,9 @@
       <children>
          <TextField alignment="CENTER" onKeyPressed="#Cursor" onMousePressed="#moveToTextField" GridPane.columnIndex="0" />
          <TextField alignment="CENTER" onKeyPressed="#Cursor" onMousePressed="#moveToTextField" GridPane.columnIndex="1" />
-         <TextField alignment="CENTER" onKeyPressed="#Cursor" onMousePressed="#moveToTextField"  GridPane.columnIndex="2" />
-          <TextField alignment="CENTER" onKeyPressed="#Cursor" onMousePressed="#moveToTextField"  GridPane.columnIndex="3" />
-          <TextField alignment="CENTER" onKeyPressed="#Cursor" onMousePressed="#moveToTextField"  GridPane.columnIndex="4" />
+         <TextField alignment="CENTER" onKeyPressed="#Cursor" onMousePressed="#moveToTextField" GridPane.columnIndex="2" />
+          <TextField alignment="CENTER" onKeyPressed="#Cursor" onMousePressed="#moveToTextField" GridPane.columnIndex="3" />
+          <TextField alignment="CENTER" onKeyPressed="#Cursor" onMousePressed="#moveToTextField" GridPane.columnIndex="4" />
           <TextField alignment="CENTER" onKeyPressed="#Cursor" onMousePressed="#moveToTextField" GridPane.rowIndex="1" />
          <TextField alignment="CENTER" onKeyPressed="#Cursor" onMousePressed="#moveToTextField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
          <TextField alignment="CENTER" onKeyPressed="#Cursor" onMousePressed="#moveToTextField" GridPane.columnIndex="2" GridPane.rowIndex="1" />
@@ -63,4 +63,21 @@
          <TextField alignment="CENTER" onKeyPressed="#Cursor" GridPane.columnIndex="4" GridPane.rowIndex="5" />
       </children>
    </GridPane>
+   <Label fx:id="playAgain11" alignment="TOP_CENTER" layoutX="94.0" layoutY="166.0" prefHeight="70.0" prefWidth="126.0" text="You Win!" visible="false">
+      <font>
+         <Font size="24.0" />
+      </font>
+   </Label>
+   <Label fx:id="playAgain1" alignment="TOP_CENTER" layoutX="94.0" layoutY="206.0" prefHeight="70.0" prefWidth="126.0" text="You Lose!" visible="false">
+      <font>
+         <Font size="24.0" />
+      </font>
+   </Label>
+   <Label fx:id="playAgain" alignment="TOP_CENTER" layoutX="94.0" layoutY="30.0" prefHeight="70.0" prefWidth="126.0" text="Play Again?" visible="false">
+      <font>
+         <Font size="24.0" />
+      </font>
+   </Label>
+   <Button fx:id="Yes" mnemonicParsing="false" onAction="#playAgain" text="Yes" visible="false" />
+   <Button fx:id="No" mnemonicParsing="false" onAction="#exitTheGame" text="No" visible="false" />
 </VBox>
