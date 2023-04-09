@@ -106,6 +106,7 @@ public class WordleController {
                         TextField newField = (TextField) n1;
                         newField.requestFocus();
                         if (wordle.isWin()) {
+                            YouWin.setText("You win!");
                             YouWin.setVisible(true);
                         } else if (wordle.isLoss()) {
                             YouLose.setText("You Lose! The correct answer was: "+ wordle.getAnswer());
@@ -214,8 +215,10 @@ public class WordleController {
             }
         }
         playAgain.setVisible(false);
-        theanswer.setVisible(false);
-        exit.setVisible(false);
+        YouWin.setVisible(false);
+        YouLose.setVisible(false);
+        Yes.setVisible(false);
+        No.setVisible(false);
         r = 0;
         c = 0;
         Node n2 = getNode(gridPane, c, r);
