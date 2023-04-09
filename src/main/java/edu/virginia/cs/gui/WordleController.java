@@ -1,9 +1,9 @@
 package edu.virginia.cs.gui;
+
 import edu.virginia.cs.wordle.IllegalWordException;
 import edu.virginia.cs.wordle.LetterResult;
 import edu.virginia.cs.wordle.WordleDictionary;
 import edu.virginia.cs.wordle.WordleImplementation;
-
 import javafx.event.ActionEvent;
 import javafx.event.EventType;
 import javafx.fxml.FXML;
@@ -11,13 +11,10 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
-import javafx.scene.text.Text;
-import java.util.EventListener;
-import java.util.ArrayList;
+import java.security.Key;
 
 public class WordleController {
     @FXML
@@ -60,50 +57,41 @@ public class WordleController {
     }
     //if player guess is correct, end game
 
-    public void Cursor(KeyEvent event){
+    public void Cursor(KeyEvent event) {
 
         //makeLabelsInvisible();
-        TextField field = (TextField) getNode(gridPane,c,r);
+        TextField field = (TextField) getNode(gridPane, c, r);
         field.setStyle("-fx-text-inner-color: #000000; -fx-background-color: #FFFFFF;");
 
-        if(event.getCode().equals(KeyCode.BACK_SPACE)){
-           // Node n1 = getNode(gridPane,c,r);
+        if (event.getText().isBlank()) {
+            // Node n1 = getNode(gridPane,c,r);
             //TextField newField = (TextField) n1;
-            if(c ==0){
+            if (c == 0) {
                 field.setText("");
             }
-            if(c>0){
-                Node n2 = getNode(gridPane,c-1,r);
+            if (c > 0) {
+                Node n2 = getNode(gridPane, c - 1, r);
                 TextField newField2 = (TextField) n2;
                 newField2.requestFocus();
                 field.clear();
                 c--;
-                guess = guess.substring(0,guess.length()-1);
+                guess = guess.substring(0, guess.length() - 1);
 
             }
 
-        }
-        /*if(event.getCode().equals(KeyCode.)){
-
-        }*/
-        else{
+        } else {
             field.setEditable(true);
-            //field.setText(event.getCharacter().toUpperCase());
-            //TextField field1 = (TextField) getNode(gridPane,c,r);
-            //field.setText(x);
-            //String n = field.getText();
-            guess+= field.getText();
-            if(c<4){
-                //field.requestFocus();
-                //TextField newField = (TextField)getNode(gridPane,c+1,r);
+            field.setText(event.getText());
+            guess += event.getText();
+            if (c < 4) {
                 field.requestFocus();
                 c++;
 
             }
-            if(c==4){
+            if (c == 4) {
                 field.requestFocus();
             }
-            if(guess.length()==5) {
+            if (guess.length() == 5) {
                 try {
                     LetterResult[] answer = wordle.submitGuess(guess);
                     for (int i = 0; i < 5; i++) {
@@ -113,10 +101,8 @@ public class WordleController {
                             field1.setStyle("-fx-background-color: #c8b653; -fx-text-inner-color: #FFFFFFF;");
                         } else if (answer[i] == LetterResult.GREEN) {
                             field1.setStyle("-fx-background-color: #228B22; -fx-text-inner-color: #FFFFFFF;");
-
                         } else if (answer[i] == LetterResult.GRAY) {
                             field1.setStyle("-fx-background-color: #808080; -fx-text-inner-color: #FFFFFFF;");
-
                         }
                     }
                     if (wordle.isGameOver()) {
@@ -135,8 +121,7 @@ public class WordleController {
                         }
                         //PlayAgain.setVisible(true);
                         //buttonsVisible();
-                    }
-                    else {
+                    } else {
                         guess = "";
                         c = 0;
                         r++;
@@ -144,14 +129,15 @@ public class WordleController {
                         TextField newField = (TextField) n1;
                         newField.requestFocus();
                     }
-                } catch(IllegalWordException newWord){
+                } catch (IllegalWordException newWord) {
                     c = 4;
-                    TextField newField = (TextField) getNode(gridPane,c,r);
+                    TextField newField = (TextField) getNode(gridPane, c, r);
                     newField.requestFocus();
                 }
             }
         }
     }
+
 
     public void makeLabelsInvisible(){
         YouLose.setVisible(false);
