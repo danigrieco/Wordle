@@ -46,7 +46,7 @@
          <TextField alignment="CENTER" onAction="#Cursor" onMousePressed="#moveToTextField" GridPane.columnIndex="2" GridPane.rowIndex="2" />
          <TextField alignment="CENTER" onAction="#Cursor" onMousePressed="#moveToTextField" GridPane.columnIndex="3" GridPane.rowIndex="2" />
          <TextField alignment="CENTER" onAction="#Cursor" onMousePressed="#moveToTextField" GridPane.columnIndex="4" GridPane.rowIndex="2" />
-         <TextField alignment="CENTER" onAction="#Cursor" opacity="0.52" GridPane.rowIndex="3" />
+         <TextField alignment="CENTER" onAction="#Cursor" GridPane.rowIndex="3" />
          <TextField alignment="CENTER" onAction="#Cursor" GridPane.columnIndex="1" GridPane.rowIndex="3" />
          <TextField alignment="CENTER" onAction="#Cursor" GridPane.columnIndex="2" GridPane.rowIndex="3" />
          <TextField alignment="CENTER" onAction="#Cursor" GridPane.columnIndex="3" GridPane.rowIndex="3" />

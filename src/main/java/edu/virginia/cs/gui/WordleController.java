@@ -24,25 +24,15 @@ public class WordleController {
     @FXML
     private Label YouLose;
     @FXML
-    private Button exit;
-    @FXML
     private Label playAgain;
     @FXML
     private Label illegalWord;
-    @FXML
-    private Label theanswer;
     private WordleImplementation wordle = new edu.virginia.cs.wordle.WordleImplementation();
     private String answer = wordle.getAnswer();
-    private int guesses;
-    @FXML
-    private Label errorLabel;
     @FXML
     private Button Yes;
     @FXML
     private Button No;
-    private Node child;
-    private TextField field;
-
     //Create 6x5 box
     @FXML
     GridPane gridPane = new GridPane();
@@ -50,7 +40,6 @@ public class WordleController {
     private int c = 0;
     private String guess = "";
     private WordleDictionary dictionary = new WordleDictionary();
-    //TextField[][] wordleGame = new TextField[5][6];
 
     public void exitTheGame(ActionEvent event){
         System.exit(0);
@@ -58,7 +47,6 @@ public class WordleController {
     //if player guess is correct, end game
 
     public void Cursor(KeyEvent event) {
-        //makeEverythingInvisible();
         TextField field = (TextField) getNode(gridPane, c, r);
         field.setStyle("-fx-text-inner-color: #000000; -fx-background-color: #FFFFFF;");
         if (event.getText().isBlank()) {
@@ -78,7 +66,6 @@ public class WordleController {
                 guess = guess.substring(0, b);
 
             }
-
         } else {
             field.setEditable(true);
             field.setText(event.getText());
@@ -114,6 +101,7 @@ public class WordleController {
                         Node n1 = getNode(gridPane, c, r);
                         TextField newField = (TextField) n1;
                         newField.requestFocus();
+                        //newField.setDisable(true);
                         if (wordle.isWin()) {
                             YouWin.setText("You win!");
                             YouWin.setVisible(true);
@@ -142,17 +130,6 @@ public class WordleController {
         }
     }
 
-
-    public void makeEverythingInvisible(){
-        YouLose.setVisible(false);
-        YouWin.setVisible(false);
-        playAgain.setVisible(false);
-        Yes.setVisible(false);
-        No.setVisible(false);
-        illegalWord.setVisible(false);
-    }
-
-
     public void buttonsVisible(){
         playAgain.setVisible(true);
         Yes.setVisible(true);
@@ -178,6 +155,7 @@ public class WordleController {
                 Node n1 = getNode(gridPane,i,j);
                 TextField newField = (TextField) n1;
                 newField.setEditable(false);
+                newField.setDisable(true);
             }
         }
     }
@@ -207,11 +185,6 @@ public class WordleController {
         return false;
     }
 
-    public void lastButtonsVisible() {
-        playAgain.setVisible(true);
-        exit.setVisible(true);
-    }
-
     public void playAgain(ActionEvent event){
         int gpwidth = 5;
         int gpheight = 6;
@@ -224,6 +197,7 @@ public class WordleController {
                 newField.setText("");
                 newField.setStyle("-fx-background-color: #FFFFFF");
                 newField.setEditable(true);
+                newField.setDisable(false);
             }
         }
         playAgain.setVisible(false);
