@@ -63,7 +63,8 @@ public class WordleController {
         field.setStyle("-fx-text-inner-color: #000000; -fx-background-color: #FFFFFF;");
         if (event.getText().isBlank()) {
             TextField x = (TextField) getNode(gridPane,4,r);
-            x.clear();
+            String blank = "";
+            x.setText(blank);
             if (c == 0) {
                 field.setText("");
             }
@@ -71,9 +72,10 @@ public class WordleController {
                 Node n2 = getNode(gridPane, c - 1, r);
                 TextField newField2 = (TextField) n2;
                 newField2.requestFocus();
-                newField2.clear();
+                newField2.setText(blank);
                 c--;
-                guess = guess.substring(0, guess.length()-1);
+                int b = c;
+                guess = guess.substring(0, b);
 
             }
 
