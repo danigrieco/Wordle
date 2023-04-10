@@ -28,6 +28,8 @@ public class WordleController {
     @FXML
     private Label playAgain;
     @FXML
+    private Label illegalWord;
+    @FXML
     private Label theanswer;
     private WordleImplementation wordle = new edu.virginia.cs.wordle.WordleImplementation();
     private String answer = wordle.getAnswer();
@@ -56,11 +58,12 @@ public class WordleController {
     //if player guess is correct, end game
 
     public void Cursor(KeyEvent event) {
-
         //makeEverythingInvisible();
         TextField field = (TextField) getNode(gridPane, c, r);
         field.setStyle("-fx-text-inner-color: #000000; -fx-background-color: #FFFFFF;");
         if (event.getText().isBlank()) {
+            TextField x = (TextField) getNode(gridPane,4,r);
+            x.clear();
             if (c == 0) {
                 field.setText("");
             }
@@ -68,20 +71,24 @@ public class WordleController {
                 Node n2 = getNode(gridPane, c - 1, r);
                 TextField newField2 = (TextField) n2;
                 newField2.requestFocus();
-                field.clear();
+                newField2.clear();
                 c--;
-                guess = guess.substring(0, c);
+                guess = guess.substring(0, guess.length()-1);
 
             }
 
         } else {
-            //field.setEditable(true);
+            field.setEditable(true);
             field.setText(event.getText());
             guess += event.getText();
             if (c < 4) {
-                TextField nextField = (TextField)getNode(gridPane,c+1,r);
-                nextField.requestFocus();
+                field = (TextField)getNode(gridPane,c+1,r);
+                field.requestFocus();
                 c++;
+                illegalWord.setVisible(false);
+            }
+            if(c==4){
+                field.requestFocus();
             }
             if (guess.length() == 5) {
                 try {
@@ -123,6 +130,8 @@ public class WordleController {
                         newField1.requestFocus();
                     }
                 } catch (IllegalWordException newWord) {
+                    illegalWord.setText("Not a word!");
+                    illegalWord.setVisible(true);
                     c = 4;
                     TextField newField2 = (TextField) getNode(gridPane, c, r);
                     newField2.requestFocus();
@@ -138,6 +147,7 @@ public class WordleController {
         playAgain.setVisible(false);
         Yes.setVisible(false);
         No.setVisible(false);
+        illegalWord.setVisible(false);
     }
 
 
