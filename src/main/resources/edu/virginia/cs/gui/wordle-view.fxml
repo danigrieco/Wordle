@@ -63,9 +63,9 @@
          <TextField alignment="CENTER" onAction="#Cursor" GridPane.columnIndex="4" GridPane.rowIndex="5" />
       </children>
    </GridPane>
-   <Label fx:id="YouWin" alignment="TOP_CENTER" layoutX="94.0" layoutY="166.0" prefHeight="70.0" prefWidth="226.0" text="You Win!" visible="false">
+   <Label fx:id="YouWin" alignment="TOP_CENTER" layoutX="94.0" layoutY="206.0" prefHeight="24.0" prefWidth="226.0" text="You Win!" visible="false">
       <font>
-         <Font size="12.0" />
+         <Font size="14.0" />
       </font>
    </Label>
    <Label fx:id="illegalWord" alignment="TOP_CENTER" layoutX="94.0" layoutY="240.0" onKeyPressed="#Cursor" prefHeight="35.0" prefWidth="172.0" text="Not a word!" visible="false">
@@ -78,10 +78,10 @@
          <Font size="12.0" />
       </font>
    </Label>
-   <Label fx:id="playAgain" alignment="TOP_CENTER" layoutX="94.0" layoutY="30.0" onKeyPressed="#Cursor" prefHeight="70.0" prefWidth="126.0" text="Play Again?" visible="false">
+   <Label fx:id="playAgain" alignment="TOP_CENTER" layoutX="94.0" layoutY="40.0" onKeyPressed="#Cursor" prefHeight="70.0" prefWidth="126.0" text="Play Again?" visible="false">
 
     <font>
-         <Font size="24.0" />
+         <Font size="22.0" />
       </font>
    </Label>
    <Button fx:id="Yes" mnemonicParsing="false" onAction="#playAgain" text="Yes" visible="false" />
