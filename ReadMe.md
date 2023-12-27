@@ -2,9 +2,9 @@
 
 ## Authors
 
-* Paula Delgado - yqy6yn
-* Dani Grieco - tgh8wp
-* Sophia Wang - fhg3rf
+* Paula Delgado
+* Dani Grieco 
+* Sophia Wang 
 
 ## How to use our code
 This application is a game where a user has to guess a five-letter word. They are given six chances
